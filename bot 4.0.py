@@ -7,7 +7,6 @@ import requests
 import numpy as np
 import webserver
 import os
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
@@ -54,7 +53,7 @@ async def remove(ctx, left: int, right: int):
     await ctx.send(left - right)
 
 @bot.command()
-async def multiplicate(ctx, left: int, right: int):
+async def multi(ctx, left: int, right: int):
     """multiplicate two numbers together."""
     await ctx.send(left * right)
 
@@ -192,6 +191,11 @@ async def mem(ctx):
             picture = discord.File(f)
         await ctx.send(file=picture)
 
+@bot.command()
+async def gif_disc(ctx):
+    gif = random.choice(os.listdir("git"))
+    await ctx.send(file=discord.File(f'git/{gif}'))
+
 #@bot.command()
 #async def check(ctx):
 #    if ctx.message.attachments:
@@ -202,6 +206,49 @@ async def mem(ctx):
 #            await ctx.send(get_class(model_path="./keras_model.h5", labels_path="labels.txt", image_path=f"./{attachment.filename}"))
 #    else:
 #        await ctx.send("You forgot to upload the image :(")
+
+@bot.command()
+async def func(ctx):
+    await ctx.send (f'''
+Hola soy el bot perteneciente a este servidor estoy para servirle, aca le enviare una lista de las funciones que puedo cumplir:
+1. "/func" puedo dar una lista con las funciones que puedo realizar
+2. "/add" puedo reallizar sumas
+3. "/remove" puedo reallizar restas
+4. "/multi" puedo reallizar multiplicaciones
+5. "/divide" puedo reallizar divisiones
+6. "/exp" puedo reallizar potencias
+7. "/raiz" puedo reallizar raiz cuadrada
+8. "/mem" soy capaz de mandar algunos memes(si deseas q yo mande alguno tuyo mandamelo)
+9. "/poke" mando imagenes de pokemon(una tontera ya lo se)
+10. "/duck" mando imagenes de patos(esto es peor q el de pokemon)
+11. "/gif_disc" mando un gif al azar (si deseas q yo mande alguno tuyo mandamelo)
+12. "/repeat" repito mensajes (no puede contener espacios asi q usa la barra baja)
+13. "/choose" puedo decidir por ti (mandame como minimo 2 palabras)
+15. "/contaminacion_ambiental"(imaginate lo q hace)
+16. "/roll" (la verdad no se q hace)
+''')
+
+@bot.command()
+async def funciones_completas(ctx):
+    await ctx.send (f'''
+Hola soy el bot perteneciente a este servidor estoy para servirle, aca le enviare una lista de las funciones que puedo cumplir:
+1. "/func" puedo dar una lista con las funciones que puedo realizar
+2. "/add" puedo reallizar sumas
+3. "/remove" puedo reallizar restas
+4. "/multi" puedo reallizar multiplicaciones
+5. "/divide" puedo reallizar divisiones
+6. "/exp" puedo reallizar potencias
+7. "/raiz" puedo reallizar raiz cuadrada
+8. "/mem" soy capaz de mandar algunos memes(si deseas q yo mande alguno tuyo mandamelo)
+9. "/poke" mando imagenes de pokemon(una tontera ya lo se)
+10. "/duck" mando imagenes de patos(esto es peor q el de pokemon)
+11. "/gif" mando un gif al azar (si deseas q yo mande alguno tuyo mandamelo)
+12. "/repeat" repito mensajes (no puede contener espacios asi q usa la barra baja)
+13. "/choose" puedo decidir por ti (mandame como minimo 2 palabras)
+14. "/limp" puedo limpiar el chat
+15. "/contaminacion_ambiental"(imaginate lo q hace)
+16. "/roll" (la verdad no se q hace)
+''')
 
 def get_duck_image_url():    
     url = 'https://random-d.uk/api/random'
@@ -234,4 +281,5 @@ async def _bot(ctx):
 webserver.keep_alive()
 
 bot.run(DISCORD_TOKEN)
+
 
